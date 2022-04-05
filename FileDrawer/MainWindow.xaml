@@ -1,0 +1,23 @@
+﻿<Window x:Class="FileDrawer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels ="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
+        xmlns:views ="clr-namespace:FileDrawer.Views"
+        xmlns:local="clr-namespace:FileDrawer"
+        mc:Ignorable="d"
+        Title="FileDrawer" Height="200" Width="600">
+    <Grid>
+        <ContentControl Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                    <views:HomeView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:CreateDrawerViewModel}">
+                    <views:CreateDrawerView />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>

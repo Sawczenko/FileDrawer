@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDrawer", "FileDrawer\FileDrawer.csproj", "{008B422B-30F8-4303-834B-3BC6BF8E65A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7A5D0B11-D5DA-4349-A78F-86E8A3AA0482}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{008B422B-30F8-4303-834B-3BC6BF8E65A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008B422B-30F8-4303-834B-3BC6BF8E65A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008B422B-30F8-4303-834B-3BC6BF8E65A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008B422B-30F8-4303-834B-3BC6BF8E65A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5D0B11-D5DA-4349-A78F-86E8A3AA0482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5D0B11-D5DA-4349-A78F-86E8A3AA0482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5D0B11-D5DA-4349-A78F-86E8A3AA0482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5D0B11-D5DA-4349-A78F-86E8A3AA0482}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40A639B5-0127-4538-89DC-FC0D8BF3506B}
+	EndGlobalSection
+EndGlobal

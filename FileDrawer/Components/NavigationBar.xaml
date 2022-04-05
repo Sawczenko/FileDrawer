@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="FileDrawer.Components.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FileDrawer.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="FileDrawer"></TextBlock>
+
+        <Button Grid.Column="1" Content="Home" Command="{Binding NavigateHomeCommand}"></Button>
+        <Button Grid.Column="2" Content="Create Drawer" Command="{Binding NavigateCreateDrawerCommand}"></Button>
+    </Grid>
+</UserControl>
