@@ -11,11 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <components:NavigationBar Grid.Row="0" DataContext="{Binding NavigationBarViewModel}"/>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Label Content="Create Drawer"></Label>
         </Grid>
     </Grid>

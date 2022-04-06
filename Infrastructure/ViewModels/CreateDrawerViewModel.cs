@@ -8,10 +8,9 @@ namespace Infrastructure.ViewModels
 {
     public class CreateDrawerViewModel : ViewModelBase
     {
-        public NavigationBarViewModel NavigationBarViewModel { get; }
-        public CreateDrawerViewModel(NavigationBarViewModel navigationBarViewModel)
+        public CreateDrawerViewModel()
         {
-            NavigationBarViewModel = navigationBarViewModel;
+
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Infrastructure.Stores;
 using Infrastructure.ViewModels;
@@ -18,12 +19,14 @@ namespace FileDrawer
     {
 
         private readonly NavigationStore _navigationStore;
-        private readonly NavigationBarViewModel _navigationBarViewModel;
-
         public App()
         {
             _navigationStore = new NavigationStore();
-            _navigationBarViewModel = new NavigationBarViewModel(CreateDrawerNavigationService(),CreateHomeNavigationService());
+        }
+
+        private NavigationBarViewModel CreateNavigationBarViewModel()
+        {
+            return new NavigationBarViewModel(CreateDrawerNavigationService(), CreateHomeNavigationService());
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -38,16 +41,18 @@ namespace FileDrawer
             base.OnStartup(e);
         }
 
-        private NavigationService<HomeViewModel> CreateHomeNavigationService()
+        private INavigationService<HomeViewModel> CreateHomeNavigationService()
         {
-            return new NavigationService<HomeViewModel>(_navigationStore,
-                () => new HomeViewModel( _navigationBarViewModel));
+            return new LayoutNavigationService<HomeViewModel>(_navigationStore,
+                CreateNavigationBarViewModel,
+                () => new HomeViewModel());
         }
 
-        private NavigationService<CreateDrawerViewModel> CreateDrawerNavigationService()
+        private INavigationService<CreateDrawerViewModel> CreateDrawerNavigationService()
         {
-            return new NavigationService<CreateDrawerViewModel>(_navigationStore,
-                () => new CreateDrawerViewModel(_navigationBarViewModel));
+            return new LayoutNavigationService<CreateDrawerViewModel>(_navigationStore,
+                CreateNavigationBarViewModel,
+                () => new CreateDrawerViewModel());
         }
 
     }

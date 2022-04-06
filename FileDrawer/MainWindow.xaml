@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels ="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
         xmlns:views ="clr-namespace:FileDrawer.Views"
+        xmlns:components ="clr-namespace:FileDrawer.Components"
         xmlns:local="clr-namespace:FileDrawer"
         mc:Ignorable="d"
         Title="FileDrawer" Height="200" Width="600">
@@ -16,6 +17,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:CreateDrawerViewModel}">
                     <views:CreateDrawerView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+                    <components:Layout></components:Layout>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

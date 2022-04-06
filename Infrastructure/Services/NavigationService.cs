@@ -1,10 +1,11 @@
 ﻿using System;
+using Infrastructure.Interfaces;
 using Infrastructure.Stores;
 using Infrastructure.ViewModels;
 
 namespace Infrastructure.Services
 {
-    public class NavigationService<TViewModel> where TViewModel : ViewModelBase
+    public class NavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
