@@ -10,8 +10,8 @@ namespace Infrastructure.ViewModels
         public ICommand NavigateHomeCommand { get; }
         public ICommand NavigateCreateDrawerCommand { get; }
 
-        public NavigationBarViewModel(INavigationService<CreateDrawerViewModel> createDrawerNavigationService,
-            INavigationService<HomeViewModel> homeNavigationService)
+        public NavigationBarViewModel(INavigationService createDrawerNavigationService,
+            INavigationService homeNavigationService)
         {
             NavigateCreateDrawerCommand = new NavigateCommand<CreateDrawerViewModel>(createDrawerNavigationService);
             NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);

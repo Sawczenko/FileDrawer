@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Interfaces
 {
-    public interface INavigationService<TViewModel> where TViewModel : ViewModelBase
+    public interface INavigationService
     {
         void Navigate();
     }

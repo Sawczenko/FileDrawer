@@ -9,6 +9,7 @@ using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Infrastructure.Stores;
 using Infrastructure.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FileDrawer
 {
@@ -17,42 +18,55 @@ namespace FileDrawer
     /// </summary>
     public partial class App : Application
     {
+        private readonly IServiceProvider _serviceProvider;
 
-        private readonly NavigationStore _navigationStore;
         public App()
         {
-            _navigationStore = new NavigationStore();
-        }
+            IServiceCollection services = new ServiceCollection();
 
-        private NavigationBarViewModel CreateNavigationBarViewModel()
-        {
-            return new NavigationBarViewModel(CreateDrawerNavigationService(), CreateHomeNavigationService());
+            services.AddSingleton<NavigationStore>();
+            
+            services.AddSingleton<INavigationService>(s=> CreateHomeNavigationService(s));
+
+            services.AddTransient(s => new HomeViewModel());
+            services.AddTransient(s => new CreateDrawerViewModel());
+            services.AddSingleton<NavigationBarViewModel>(s => CreateNavigationBarViewModel(s));
+            services.AddSingleton<MainViewModel>();
+
+            services.AddSingleton<MainWindow>(s => new MainWindow()
+            {
+                DataContext = s.GetRequiredService<MainViewModel>()
+            });
+
+            _serviceProvider = services.BuildServiceProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var homeNavigationService = CreateHomeNavigationService();
+            var homeNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
             homeNavigationService.Navigate();
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_navigationStore)
-            };
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
             base.OnStartup(e);
         }
 
-        private INavigationService<HomeViewModel> CreateHomeNavigationService()
+        private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
-            return new LayoutNavigationService<HomeViewModel>(_navigationStore,
-                CreateNavigationBarViewModel,
-                () => new HomeViewModel());
+            return new NavigationBarViewModel(CreateDrawerNavigationService(serviceProvider), CreateHomeNavigationService(serviceProvider));
         }
 
-        private INavigationService<CreateDrawerViewModel> CreateDrawerNavigationService()
+        private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
         {
-            return new LayoutNavigationService<CreateDrawerViewModel>(_navigationStore,
-                CreateNavigationBarViewModel,
-                () => new CreateDrawerViewModel());
+            return new LayoutNavigationService<HomeViewModel>(_serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
+                () => serviceProvider.GetRequiredService<HomeViewModel>());
+        }
+
+        private INavigationService CreateDrawerNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<CreateDrawerViewModel>(_serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
+                () => serviceProvider.GetRequiredService<CreateDrawerViewModel>());
         }
 
     }
