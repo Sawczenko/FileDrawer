@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FileDrawer.Views
 {
     /// <summary>
-    /// Interaction logic for CreateDrawerView.xaml
+    /// Interaction logic for ManageDrawersView.xaml
     /// </summary>
-    public partial class CreateDrawerView : UserControl
+    public partial class ManageDrawersView : UserControl
     {
-        public CreateDrawerView()
+        public ManageDrawersView()
         {
             InitializeComponent();
         }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\NavigateCommands\" />
+    <Folder Include="Commands\DrawerCommands\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
   </ItemGroup>

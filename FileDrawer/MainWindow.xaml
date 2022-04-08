@@ -8,15 +8,15 @@
         xmlns:components ="clr-namespace:FileDrawer.Components"
         xmlns:local="clr-namespace:FileDrawer"
         mc:Ignorable="d"
-        Title="FileDrawer" Height="200" Width="600">
+        Title="FileDrawer" Height="200" Width="600"  ResizeMode="NoResize">
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                     <views:HomeView />
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:CreateDrawerViewModel}">
-                    <views:CreateDrawerView />
+                <DataTemplate DataType="{x:Type viewmodels:ManageDrawersViewModel}">
+                    <views:ManageDrawersView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
                     <components:Layout></components:Layout>

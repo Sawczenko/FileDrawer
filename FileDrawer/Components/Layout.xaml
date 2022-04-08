@@ -8,11 +8,11 @@
              d:DesignHeight="200" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <local:NavigationBar Grid.Row="0" DataContext="{Binding NavigationBarViewModel}"></local:NavigationBar>
-        <ContentControl Grid.Row="1" Content="{Binding ContentViewModel}" Margin="20"></ContentControl>
+        <ContentControl Grid.Row="1" Content="{Binding ContentViewModel}" Margin="5"></ContentControl>
     </Grid>
 
 </UserControl>

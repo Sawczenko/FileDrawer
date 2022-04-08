@@ -13,7 +13,7 @@ namespace Infrastructure.ViewModels
         public NavigationBarViewModel(INavigationService createDrawerNavigationService,
             INavigationService homeNavigationService)
         {
-            NavigateCreateDrawerCommand = new NavigateCommand<CreateDrawerViewModel>(createDrawerNavigationService);
+            NavigateCreateDrawerCommand = new NavigateCommand<ManageDrawersViewModel>(createDrawerNavigationService);
             NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
         }
     }

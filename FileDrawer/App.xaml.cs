@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DataStorage;
 using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Infrastructure.Stores;
@@ -29,7 +30,7 @@ namespace FileDrawer
             services.AddSingleton<INavigationService>(s=> CreateHomeNavigationService(s));
 
             services.AddTransient(s => new HomeViewModel());
-            services.AddTransient(s => new CreateDrawerViewModel());
+            services.AddTransient(s => new ManageDrawersViewModel());
             services.AddSingleton<NavigationBarViewModel>(s => CreateNavigationBarViewModel(s));
             services.AddSingleton<MainViewModel>();
 
@@ -37,6 +38,8 @@ namespace FileDrawer
             {
                 DataContext = s.GetRequiredService<MainViewModel>()
             });
+
+            services.AddDbContext<FileDrawerDbContext>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
@@ -64,9 +67,9 @@ namespace FileDrawer
 
         private INavigationService CreateDrawerNavigationService(IServiceProvider serviceProvider)
         {
-            return new LayoutNavigationService<CreateDrawerViewModel>(_serviceProvider.GetRequiredService<NavigationStore>(),
+            return new LayoutNavigationService<ManageDrawersViewModel>(_serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
-                () => serviceProvider.GetRequiredService<CreateDrawerViewModel>());
+                () => serviceProvider.GetRequiredService<ManageDrawersViewModel>());
         }
 
     }
