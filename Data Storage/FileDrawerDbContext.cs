@@ -13,12 +13,6 @@ namespace DataStorage
         public DbSet<File> Files { get; set; }
         public string DbPath { get; set; }
 
-        public FileDrawerDbContext()
-        {
-            var folder = Directory.GetCurrentDirectory();
-
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("FileName = FileDrawerDatabase", option =>
