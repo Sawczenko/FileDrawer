@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileDrawer", "FileDrawer\Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7A5D0B11-D5DA-4349-A78F-86E8A3AA0482}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStorage", "Data Storage\DataStorage.csproj", "{EA15AA8C-F3FC-4304-8E96-395C46ADA180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorage", "Data Storage\DataStorage.csproj", "{EA15AA8C-F3FC-4304-8E96-395C46ADA180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{8D251642-4BA8-4D5F-BDED-AA4ECDEA396B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{8D251642-4BA8-4D5F-BDED-AA4ECDEA396B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

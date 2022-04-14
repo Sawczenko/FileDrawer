@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using DataStorage;
+using FileDrawer.Components.Modal;
+using FileDrawer.Extensions;
 using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Infrastructure.Stores;
@@ -23,25 +25,10 @@ namespace FileDrawer
 
         public App()
         {
-            IServiceCollection services = new ServiceCollection();
+            DependencyInjectionExtensions dependencyInjectionExtensions =
+                new DependencyInjectionExtensions();
 
-            services.AddSingleton<NavigationStore>();
-            
-            services.AddSingleton<INavigationService>(s=> CreateHomeNavigationService(s));
-
-            services.AddTransient(s => new HomeViewModel());
-            services.AddTransient(s => new ManageDrawersViewModel());
-            services.AddSingleton<NavigationBarViewModel>(s => CreateNavigationBarViewModel(s));
-            services.AddSingleton<MainViewModel>();
-
-            services.AddSingleton<MainWindow>(s => new MainWindow()
-            {
-                DataContext = s.GetRequiredService<MainViewModel>()
-            });
-
-            services.AddDbContext<FileDrawerDbContext>();
-
-            _serviceProvider = services.BuildServiceProvider();
+            _serviceProvider = dependencyInjectionExtensions.Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -52,25 +39,6 @@ namespace FileDrawer
             MainWindow.Show();
             base.OnStartup(e);
         }
-
-        private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
-        {
-            return new NavigationBarViewModel(CreateDrawerNavigationService(serviceProvider), CreateHomeNavigationService(serviceProvider));
-        }
-
-        private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
-        {
-            return new LayoutNavigationService<HomeViewModel>(_serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
-                () => serviceProvider.GetRequiredService<HomeViewModel>());
-        }
-
-        private INavigationService CreateDrawerNavigationService(IServiceProvider serviceProvider)
-        {
-            return new LayoutNavigationService<ManageDrawersViewModel>(_serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
-                () => serviceProvider.GetRequiredService<ManageDrawersViewModel>());
-        }
-
+        
     }
 }

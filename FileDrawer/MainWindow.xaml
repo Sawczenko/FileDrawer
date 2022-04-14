@@ -7,21 +7,26 @@
         xmlns:views ="clr-namespace:FileDrawer.Views"
         xmlns:components ="clr-namespace:FileDrawer.Components"
         xmlns:local="clr-namespace:FileDrawer"
+        xmlns:modal ="clr-namespace:FileDrawer.Components.Modal"
         mc:Ignorable="d"
         Title="FileDrawer" Height="200" Width="600"  ResizeMode="NoResize">
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                    <views:HomeView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:ManageDrawersViewModel}">
-                    <views:ManageDrawersView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
-                    <components:Layout></components:Layout>
-                </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>
+
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ManageDrawersViewModel}">
+                <views:ManageDrawersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+                <components:Layout></components:Layout>
+            </DataTemplate>
+        </Grid.Resources>
+            
+        <modal:Modal Panel.ZIndex="100" IsOpen="{Binding IsModalOpen}">
+            <ContentControl Content="{Binding CurrentModalViewModel}"/>
+        </modal:Modal>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
