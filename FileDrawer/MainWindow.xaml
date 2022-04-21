@@ -3,30 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels ="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
+        xmlns:viewModels ="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
         xmlns:views ="clr-namespace:FileDrawer.Views"
         xmlns:components ="clr-namespace:FileDrawer.Components"
         xmlns:local="clr-namespace:FileDrawer"
         xmlns:modal ="clr-namespace:FileDrawer.Components.Modal"
         mc:Ignorable="d"
-        Title="FileDrawer" Height="200" Width="600"  ResizeMode="NoResize">
+        Title="FileDrawer" Height="250" Width="600"  ResizeMode="NoResize">
     <Grid>
 
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                 <views:HomeView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ManageDrawersViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:ManageDrawersViewModel}">
                 <views:ManageDrawersView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:LayoutViewModel}">
                 <components:Layout></components:Layout>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CreateNewDrawerViewModel}">
+                <views:CreateNewDrawerView/>
             </DataTemplate>
         </Grid.Resources>
             
         <modal:Modal Panel.ZIndex="100" IsOpen="{Binding IsModalOpen}">
             <ContentControl Content="{Binding CurrentModalViewModel}"/>
         </modal:Modal>
+
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

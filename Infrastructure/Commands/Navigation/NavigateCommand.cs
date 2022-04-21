@@ -4,9 +4,9 @@ using Infrastructure.Services;
 using Infrastructure.Stores;
 using Infrastructure.ViewModels;
 
-namespace Infrastructure.Commands.NavigateCommands
+namespace Infrastructure.Commands.Navigation
 {
-    public class NavigateCommand<TViewModel> : CommandBase where TViewModel : ViewModelBase
+    public class NavigateCommand : CommandBase 
     {
         private readonly INavigationService _navigationService;
 

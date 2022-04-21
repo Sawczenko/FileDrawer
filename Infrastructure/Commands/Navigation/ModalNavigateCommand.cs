@@ -2,9 +2,9 @@
 using Infrastructure.Services;
 using Infrastructure.ViewModels;
 
-namespace Infrastructure.Commands.NavigateCommands
+namespace Infrastructure.Commands.Navigation
 {
-    public class ModalNavigateCommand<TViewModel> : CommandBase where TViewModel : ViewModelBase
+    public class ModalNavigateCommand : CommandBase
     {
         private readonly INavigationService _modalNavigationService;
 

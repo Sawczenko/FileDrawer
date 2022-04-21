@@ -6,7 +6,6 @@ namespace Infrastructure.ViewModels
     {
         private readonly NavigationStore _navigationStore;
         private readonly ModalNavigationStore _modalNavigationStore;
-
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
         public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
@@ -24,7 +23,6 @@ namespace Infrastructure.ViewModels
             OnPropertyChanged(nameof(CurrentModalViewModel));
             OnPropertyChanged(nameof(IsModalOpen));
         }
-
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));

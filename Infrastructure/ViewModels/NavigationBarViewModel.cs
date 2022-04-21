@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Infrastructure.Commands.NavigateCommands;
+using Infrastructure.Commands.Navigation;
 using Infrastructure.Interfaces;
 using Infrastructure.Services;
 
@@ -13,8 +13,8 @@ namespace Infrastructure.ViewModels
         public NavigationBarViewModel(INavigationService createDrawerNavigationService,
             INavigationService homeNavigationService)
         {
-            NavigateCreateDrawerCommand = new NavigateCommand<ManageDrawersViewModel>(createDrawerNavigationService);
-            NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
+            NavigateCreateDrawerCommand = new NavigateCommand(createDrawerNavigationService);
+            NavigateHomeCommand = new NavigateCommand(homeNavigationService);
         }
     }
 }

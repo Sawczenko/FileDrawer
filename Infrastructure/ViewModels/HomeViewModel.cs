@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using Infrastructure.Commands;
-using Infrastructure.Commands.NavigateCommands;
+using Infrastructure.Commands.Navigation;
 using Infrastructure.Services;
 using Infrastructure.Stores;
 

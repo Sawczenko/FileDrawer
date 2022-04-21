@@ -21,21 +21,18 @@ namespace FileDrawer
     /// </summary>
     public partial class App : Application
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly DependencyInjectionProvider _dependencyInjectionProvider;
 
         public App()
         {
-            DependencyInjectionExtensions dependencyInjectionExtensions =
-                new DependencyInjectionExtensions();
-
-            _serviceProvider = dependencyInjectionExtensions.Build();
+            _dependencyInjectionProvider = new DependencyInjectionProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var homeNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
+            var homeNavigationService = _dependencyInjectionProvider.ServiceProvider.GetRequiredService<INavigationService>();
             homeNavigationService.Navigate();
-            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow = _dependencyInjectionProvider.ServiceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
             base.OnStartup(e);
         }
