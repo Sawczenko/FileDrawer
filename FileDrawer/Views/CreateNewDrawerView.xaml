@@ -7,6 +7,18 @@
              mc:Ignorable="d" 
              Height="150" Width="200" Background="White">
     <Grid>
-        <Button Width="50" Height="20" Content="Save" Command="{Binding SaveDrawerCommand}"></Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0" Content="Name:" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Content="Drawer path:" HorizontalAlignment="Center" Margin="0,49,0,0" VerticalAlignment="Top"/>
+
+        <Button Grid.Column="1" Width="40" Height="20" Content="Save" Command="{Binding SaveDrawerCommand}" CommandParameter="{Binding Drawer}" Margin="0,126,60,4"/>
+        <Button Grid.Column="1" Width="40" Height="20" Content="Close" Command="{Binding CloseCreatorCommand}" Margin="50,126,10,4"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,16,0,0" Text="{Binding Drawer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"/>
+
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,53,0,0" Text="{Binding DrawerPathText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
     </Grid>
 </UserControl>

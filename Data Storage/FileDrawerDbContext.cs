@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using File = Core.Entities.File;
 
 namespace DataStorage
@@ -13,13 +14,9 @@ namespace DataStorage
         public DbSet<File> Files { get; set; }
         public string DbPath { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public FileDrawerDbContext(DbContextOptions<FileDrawerDbContext> options) : base(options)
         {
-            optionsBuilder.UseSqlite("FileName = FileDrawerDatabase", option =>
-            {
-                option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            });
-            base.OnConfiguring(optionsBuilder);
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

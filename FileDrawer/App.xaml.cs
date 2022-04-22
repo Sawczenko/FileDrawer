@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +13,9 @@ using Infrastructure.Services;
 using Infrastructure.Stores;
 using Infrastructure.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+
 
 namespace FileDrawer
 {
@@ -22,10 +25,15 @@ namespace FileDrawer
     public partial class App : Application
     {
         private readonly DependencyInjectionProvider _dependencyInjectionProvider;
+        private readonly IConfiguration _configuration;
 
         public App()
         {
-            _dependencyInjectionProvider = new DependencyInjectionProvider();
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            _configuration = builder.Build();
+
+            _dependencyInjectionProvider = new DependencyInjectionProvider(_configuration);
         }
 
         protected override void OnStartup(StartupEventArgs e)

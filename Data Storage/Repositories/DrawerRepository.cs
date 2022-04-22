@@ -42,7 +42,7 @@ namespace DataStorage.Repositories
             Save();
         }
 
-        public void Save()
+        private void Save()
         {
             _fileDrawerDbContext.SaveChanges();
         }

@@ -11,6 +11,5 @@ namespace DataStorage.Interfaces
         void AddDrawer(Drawer drawer);
         void DeleteDrawer(Drawer drawer);
         void UpdateDrawer(Drawer drawer);
-        void Save();
     }
 }
