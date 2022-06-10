@@ -3,14 +3,16 @@ using System;
 using DataStorage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataStorage.Migrations
 {
-    [DbContext(typeof(FileDrawerDbContext))]
-    partial class FileDrawerDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(FileDrawerDatabaseContext))]
+    [Migration("20220505201830_EntitiesUpdate")]
+    partial class EntitiesUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,20 +24,26 @@ namespace DataStorage.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DrawerPath")
+                    b.Property<DateTime>("CreationDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("FileCount")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Path")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name");
 
-                    b.ToTable("Drawers", "test");
+                    b.ToTable("Drawers", "Drawers");
                 });
 
-            modelBuilder.Entity("Core.Entities.File", b =>
+            modelBuilder.Entity("Core.Entities.DrawerFile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,16 +58,19 @@ namespace DataStorage.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Size")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DrawerId");
 
                     b.HasIndex("Name");
 
-                    b.ToTable("Files", "test");
+                    b.ToTable("Files", "Files");
                 });
 
-            modelBuilder.Entity("Core.Entities.File", b =>
+            modelBuilder.Entity("Core.Entities.DrawerFile", b =>
                 {
                     b.HasOne("Core.Entities.Drawer", null)
                         .WithMany("FileList")

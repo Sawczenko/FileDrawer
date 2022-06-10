@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Interfaces;
 
-namespace Infrastructure.Commands.Drawers.CreateNewDrawerCommands
+namespace Infrastructure.Commands.ManageDrawers.CreateNewDrawerCommands
 {
     public class CloseCreatorCommand : CommandBase
     {

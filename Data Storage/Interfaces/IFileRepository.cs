@@ -5,11 +5,11 @@ namespace DataStorage.Interfaces
 {
     public interface IFileRepository
     {
-        IEnumerable<File> GetFiles();
-        File GetFileById(int fileId);
-        void AddFile(File file);
-        void DeleteFile(File file);
-        void UpdateFile(File file);
+        IEnumerable<DrawerFile> GetFiles();
+        DrawerFile GetFileById(int fileId);
+        void AddFile(DrawerFile file);
+        void DeleteFile(DrawerFile file);
+        void UpdateFile(DrawerFile file);
         void Save();
     }
 }

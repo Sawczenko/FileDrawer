@@ -25,15 +25,10 @@ namespace FileDrawer
     public partial class App : Application
     {
         private readonly DependencyInjectionProvider _dependencyInjectionProvider;
-        private readonly IConfiguration _configuration;
 
         public App()
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            _configuration = builder.Build();
-
-            _dependencyInjectionProvider = new DependencyInjectionProvider(_configuration);
+            _dependencyInjectionProvider = new DependencyInjectionProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)

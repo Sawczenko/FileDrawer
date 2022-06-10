@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Entities;
 
 namespace DataStorage.Interfaces
 {
     public interface IDrawerRepository
     {
-        IEnumerable<Drawer> GetDrawers();
+        Task<List<Drawer>> GetDrawers();
         Drawer GetDrawerById(int drawerId);
-        void AddDrawer(Drawer drawer);
+        Task AddDrawer(Drawer drawer);
         void DeleteDrawer(Drawer drawer);
         void UpdateDrawer(Drawer drawer);
     }

@@ -1,22 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Core.Entities;
 using DataStorage.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataStorage.Repositories
 {
     public class DrawerRepository : IDrawerRepository
     {
-        private readonly FileDrawerDbContext _fileDrawerDbContext;
+        private readonly FileDrawerDatabaseContext _fileDrawerDbContext;
 
-        public DrawerRepository(FileDrawerDbContext fileDrawerDbContext)
+        public DrawerRepository(FileDrawerDatabaseContext fileDrawerDbContext)
         {
             _fileDrawerDbContext = fileDrawerDbContext;
         }
 
-        public IEnumerable<Drawer> GetDrawers()
+        public async Task<List<Drawer>> GetDrawers()
         {
-            return _fileDrawerDbContext.Drawers.AsEnumerable();
+            return await _fileDrawerDbContext.Drawers.ToListAsync();
         }
 
         public Drawer GetDrawerById(int drawerId)
@@ -24,9 +26,9 @@ namespace DataStorage.Repositories
             return _fileDrawerDbContext.Drawers.FirstOrDefault(d => d.Id == drawerId);
         }
 
-        public void AddDrawer(Drawer drawer)
+        public async Task AddDrawer(Drawer drawer)
         {
-            _fileDrawerDbContext.Drawers.Add(drawer);
+            await _fileDrawerDbContext.Drawers.AddAsync(drawer);
             Save();
         }
 

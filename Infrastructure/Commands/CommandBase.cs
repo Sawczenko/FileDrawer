@@ -5,7 +5,7 @@ namespace Infrastructure.Commands
 {
     public abstract class CommandBase : ICommand
     {
-        public bool CanExecute(object? parameter)
+        public virtual bool CanExecute(object? parameter)
         {
             return true;
         }

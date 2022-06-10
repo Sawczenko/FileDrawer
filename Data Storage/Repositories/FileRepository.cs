@@ -7,35 +7,35 @@ namespace DataStorage.Repositories
 {
     public class FileRepository : IFileRepository
     {
-        private readonly FileDrawerDbContext _fileDrawerDbContext;
+        private readonly FileDrawerDatabaseContext _fileDrawerDbContext;
 
-        public FileRepository(FileDrawerDbContext fileDrawerDbContext)
+        public FileRepository(FileDrawerDatabaseContext fileDrawerDbContext)
         {
             _fileDrawerDbContext = fileDrawerDbContext;
         }
-        public IEnumerable<File> GetFiles()
+        public IEnumerable<DrawerFile> GetFiles()
         {
             return _fileDrawerDbContext.Files.AsEnumerable();
         }
 
-        public File GetFileById(int fileId)
+        public DrawerFile GetFileById(int fileId)
         {
             return _fileDrawerDbContext.Files.FirstOrDefault(f => f.Id == fileId);
         }
 
-        public void AddFile(File file)
+        public void AddFile(DrawerFile file)
         {
             _fileDrawerDbContext.Files.Add(file);
             Save();
         }
 
-        public void DeleteFile(File file)
+        public void DeleteFile(DrawerFile file)
         {
             _fileDrawerDbContext.Files.Remove(file);
             Save();
         }
 
-        public void UpdateFile(File file)
+        public void UpdateFile(DrawerFile file)
         {
             _fileDrawerDbContext.Files.Update(file);
             Save();

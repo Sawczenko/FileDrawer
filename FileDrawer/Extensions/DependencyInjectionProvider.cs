@@ -15,13 +15,11 @@ namespace FileDrawer.Extensions
 {
     public class DependencyInjectionProvider
     {
-        private readonly IConfiguration _configuration;
         private readonly IServiceCollection _services;
         public IServiceProvider ServiceProvider;
 
-        public DependencyInjectionProvider(IConfiguration configuration)
+        public DependencyInjectionProvider()
         {
-            _configuration = configuration;
             _services = new ServiceCollection();
             ServiceProvider = Build();
         }
@@ -39,8 +37,7 @@ namespace FileDrawer.Extensions
 
         private void AddDatabase()
         {
-            _services.AddDbContext<FileDrawerDbContext>(options =>
-                options.UseSqlite(_configuration.GetConnectionString("FileDrawerDb")));
+            _services.AddDbContext<FileDrawerDatabaseContext>();
             _services.AddScoped<IFileRepository,FileRepository>();
             _services.AddScoped<IDrawerRepository,DrawerRepository>();
         }
@@ -49,19 +46,19 @@ namespace FileDrawer.Extensions
         {
             _services.AddSingleton<NavigationStore>();
             _services.AddSingleton<ModalNavigationStore>();
+            _services.AddSingleton<DrawerStore>();
         }
 
         private void AddServices()
         {
             _services.AddTransient<CloseModalNavigationService>();
         }
-
         private void AddViewModels()
         {
             _services.AddTransient(s => new HomeViewModel());
-            _services.AddTransient(s => new ManageDrawersViewModel(CreateNewDrawerModalNavigationService(s)));
-            _services.AddTransient(s => new CreateNewDrawerViewModel(s.GetRequiredService<IDrawerRepository>(),CreateNewDrawerCloseModalNavigationService(s)));
-
+            _services.AddTransient(s => new ManageDrawersViewModel(s.GetRequiredService<DrawerStore>(),CreateNewDrawerModalNavigationService(s),EditDrawerModalNavigationService(s)));
+            _services.AddTransient(s => new CreateNewDrawerViewModel(s.GetRequiredService<DrawerStore>(),CloseModalNavigationService(s)));
+            _services.AddTransient(s => new EditDrawerViewModel(s.GetRequiredService<IDrawerRepository>(), CloseModalNavigationService(s),s.GetRequiredService<DrawerStore>()));
             _services.AddSingleton<MainViewModel>();
             _services.AddSingleton(CreateNavigationBarViewModel);
         }
@@ -91,9 +88,15 @@ namespace FileDrawer.Extensions
                 serviceProvider.GetRequiredService<CreateNewDrawerViewModel>);
         }
 
-        private INavigationService CreateNewDrawerCloseModalNavigationService(IServiceProvider serviceProvider)
+        private INavigationService CloseModalNavigationService(IServiceProvider serviceProvider)
         {
             return new CloseModalNavigationService(serviceProvider.GetRequiredService<ModalNavigationStore>());
+        }
+
+        private INavigationService EditDrawerModalNavigationService(IServiceProvider serviceProvider)
+        {
+            return new ModalNavigationService<EditDrawerViewModel>(serviceProvider
+                .GetRequiredService<ModalNavigationStore>(),serviceProvider.GetRequiredService<EditDrawerViewModel>);
         }
         #endregion
 

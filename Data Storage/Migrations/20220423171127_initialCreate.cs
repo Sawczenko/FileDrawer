@@ -7,17 +7,20 @@ namespace DataStorage.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "test");
+                name: "Drawers");
+
+            migrationBuilder.EnsureSchema(
+                name: "Files");
 
             migrationBuilder.CreateTable(
                 name: "Drawers",
-                schema: "test",
+                schema: "Drawers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    DrawerPath = table.Column<string>(type: "TEXT", nullable: true)
+                    Path = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,7 +29,7 @@ namespace DataStorage.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Files",
-                schema: "test",
+                schema: "Files",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -41,7 +44,7 @@ namespace DataStorage.Migrations
                     table.ForeignKey(
                         name: "FK_Files_Drawers_DrawerId",
                         column: x => x.DrawerId,
-                        principalSchema: "test",
+                        principalSchema: "Drawers",
                         principalTable: "Drawers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -49,19 +52,19 @@ namespace DataStorage.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Drawers_Name",
-                schema: "test",
+                schema: "Drawers",
                 table: "Drawers",
                 column: "Name");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Files_DrawerId",
-                schema: "test",
+                schema: "Files",
                 table: "Files",
                 column: "DrawerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Files_Name",
-                schema: "test",
+                schema: "Files",
                 table: "Files",
                 column: "Name");
         }
@@ -70,11 +73,11 @@ namespace DataStorage.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Files",
-                schema: "test");
+                schema: "Files");
 
             migrationBuilder.DropTable(
                 name: "Drawers",
-                schema: "test");
+                schema: "Drawers");
         }
     }
 }

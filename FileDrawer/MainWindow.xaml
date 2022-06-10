@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:FileDrawer"
         xmlns:modal ="clr-namespace:FileDrawer.Components.Modal"
         mc:Ignorable="d"
-        Title="FileDrawer" Height="250" Width="600" ResizeMode="NoResize">
+        Title="FileDrawer" Height="280" Width="600" ResizeMode="NoResize">
     <Grid>
 
         <Grid.Resources>
@@ -24,6 +24,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:CreateNewDrawerViewModel}">
                 <views:CreateNewDrawerView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:EditDrawerViewModel}">
+                <views:EditDrawerView/>
             </DataTemplate>
         </Grid.Resources>
             

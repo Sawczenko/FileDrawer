@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataStorage.Migrations
 {
-    [DbContext(typeof(FileDrawerDbContext))]
-    [Migration("20220422202124_initialCreate")]
+    [DbContext(typeof(FileDrawerDatabaseContext))]
+    [Migration("20220423171127_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,17 +24,17 @@ namespace DataStorage.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DrawerPath")
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Path")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name");
 
-                    b.ToTable("Drawers", "test");
+                    b.ToTable("Drawers", "Drawers");
                 });
 
             modelBuilder.Entity("Core.Entities.File", b =>
@@ -58,7 +58,7 @@ namespace DataStorage.Migrations
 
                     b.HasIndex("Name");
 
-                    b.ToTable("Files", "test");
+                    b.ToTable("Files", "Files");
                 });
 
             modelBuilder.Entity("Core.Entities.File", b =>

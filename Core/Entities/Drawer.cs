@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Entities
 {
@@ -6,7 +7,9 @@ namespace Core.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<File> FileList { get; set; }
-        public string DrawerPath { get; set; }
+        public List<DrawerFile> FileList { get; set; }
+        public string Path { get; set; }
+        public int FileCount { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

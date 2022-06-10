@@ -4,15 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FileDrawer.Views"
+             xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="160" d:DesignWidth="600" Background="White">
     <Grid>
         <StackPanel Height="160">
             <WrapPanel Height="40">
                 <Label Content="Manage Drawers" FontSize="15"></Label>
-                <Button Content="Add new drawer" Margin="5" Command="{Binding AddNewDrawerCommand}"></Button>
+                <Button Content="Add new drawer" Margin="5" Command="{Binding AddNewDrawerCommand}" ></Button>
             </WrapPanel>
-            <ListView></ListView>
+            <DataGrid ItemsSource="{Binding Drawers}" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="Column" SelectedItem="{Binding Drawer}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Path" Binding="{Binding Path}"></DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditDrawerCommand}" CommandParameter="{Binding Drawer}"/>
+                </DataGrid.InputBindings>
+            </DataGrid>  
         </StackPanel>
     </Grid>
 </UserControl>
