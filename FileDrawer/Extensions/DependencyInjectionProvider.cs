@@ -1,12 +1,12 @@
 ﻿using System;
 using System.DirectoryServices;
-using DataStorage;
-using DataStorage.Interfaces;
-using DataStorage.Repositories;
-using Infrastructure.Interfaces;
-using Infrastructure.Services;
-using Infrastructure.Stores;
-using Infrastructure.ViewModels;
+using Core.Application.Interfaces;
+using Core.Application.Services;
+using Core.Application.Stores;
+using Core.Application.ViewModels;
+using Infrastructure.Persistence;
+using Infrastructure.Persistence.Interfaces;
+using Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +38,7 @@ namespace FileDrawer.Extensions
         private void AddDatabase()
         {
             _services.AddDbContext<FileDrawerDatabaseContext>();
-            _services.AddScoped<IFileRepository,FileRepository>();
+            _services.AddScoped<IFileRepository, FileRepository>();
             _services.AddScoped<IDrawerRepository,DrawerRepository>();
         }
 
@@ -58,7 +58,7 @@ namespace FileDrawer.Extensions
             _services.AddTransient(s => new HomeViewModel());
             _services.AddTransient(s => new ManageDrawersViewModel(s.GetRequiredService<DrawerStore>(),CreateNewDrawerModalNavigationService(s),EditDrawerModalNavigationService(s)));
             _services.AddTransient(s => new CreateNewDrawerViewModel(s.GetRequiredService<DrawerStore>(),CloseModalNavigationService(s)));
-            _services.AddTransient(s => new EditDrawerViewModel(s.GetRequiredService<IDrawerRepository>(), CloseModalNavigationService(s),s.GetRequiredService<DrawerStore>()));
+            _services.AddTransient(s => new EditDrawerViewModel( CloseModalNavigationService(s),s.GetRequiredService<DrawerStore>()));
             _services.AddSingleton<MainViewModel>();
             _services.AddSingleton(CreateNavigationBarViewModel);
         }

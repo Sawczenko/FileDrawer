@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels ="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
         xmlns:views ="clr-namespace:FileDrawer.Views"
         xmlns:components ="clr-namespace:FileDrawer.Components"
         xmlns:local="clr-namespace:FileDrawer"
         xmlns:modal ="clr-namespace:FileDrawer.Components.Modal"
+        xmlns:viewModels="clr-namespace:Core.Application.ViewModels;assembly=Core.Application"
         mc:Ignorable="d"
         Title="FileDrawer" Height="280" Width="600" ResizeMode="NoResize">
     <Grid>
