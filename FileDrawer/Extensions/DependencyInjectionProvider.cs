@@ -55,7 +55,7 @@ namespace FileDrawer.Extensions
         }
         private void AddViewModels()
         {
-            _services.AddTransient(s => new HomeViewModel());
+            _services.AddTransient(s => new HomeViewModel(s.GetRequiredService<DrawerStore>()));
             _services.AddTransient(s => new ManageDrawersViewModel(s.GetRequiredService<DrawerStore>(),CreateNewDrawerModalNavigationService(s),EditDrawerModalNavigationService(s)));
             _services.AddTransient(s => new CreateNewDrawerViewModel(s.GetRequiredService<DrawerStore>(),CloseModalNavigationService(s)));
             _services.AddTransient(s => new EditDrawerViewModel( CloseModalNavigationService(s),s.GetRequiredService<DrawerStore>()));

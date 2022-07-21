@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Core.Application.Commands.ManageDrawers.CreateNewDrawerCommands;
 using Core.Application.Commands.ManageDrawers.EditDrawersCommands;
-using Core.Application.Commands.Navigation;
 using Core.Application.Interfaces;
 using Core.Application.Stores;
 using Core.Entities.Entities;
-using Infrastructure.Persistence.Interfaces;
 
 namespace Core.Application.ViewModels
 {
-    public class EditDrawerViewModel : ViewModelBase
+    public class CreateEditDrawerViewModel : ViewModelBase
     {
-        public ICommand CloseEditorCommand { get; }
+        private readonly DrawerStore _drawerStore;
+        public ICommand SaveDrawerCommand { get; }
+        public ICommand CloseCreatorCommand { get; }
         public ICommand AddFilesCommand { get; }
 
         private Drawer _drawer;
@@ -39,23 +43,19 @@ namespace Core.Application.ViewModels
             }
         }
 
-        private readonly DrawerStore _drawerStore;
-
-        public EditDrawerViewModel(INavigationService closeModalNavigationService, DrawerStore drawerStore)
+        public CreateEditDrawerViewModel(DrawerStore drawerStore,
+            INavigationService closeModalNavigationService)
         {
-            _drawerFiles = new ObservableCollection<DrawerFile>();
             _drawerStore = drawerStore;
-            _drawer = _drawerStore.GetSelectedDrawer();
-            CloseEditorCommand = new ModalNavigateCommand(closeModalNavigationService);
-            AddFilesCommand = new AddFilesCommand(_drawerStore);
-            _drawerStore.DrawerChanged += OnDrawerChanged;
-            PrepareView();
-        }
 
-        public override void Dispose()
-        {
-            _drawerStore.DrawerAdded -= OnDrawerChanged;
-            base.Dispose();
+            Drawer = new Drawer();
+            _drawerFiles = new ObservableCollection<DrawerFile>();
+
+            _drawerStore.DrawerChanged += OnDrawerChanged;
+
+            SaveDrawerCommand = new SaveDrawerCommand(drawerStore, closeModalNavigationService);
+            CloseCreatorCommand = new CloseCreatorCommand(closeModalNavigationService);
+            AddFilesCommand = new AddFilesCommand(_drawerStore);
         }
 
         private void OnDrawerChanged(Drawer drawer)
@@ -64,16 +64,10 @@ namespace Core.Application.ViewModels
             DrawerFiles = new ObservableCollection<DrawerFile>(drawer.FileList);
         }
 
-        private void PrepareView()
+        public override void Dispose()
         {
-            Drawer = _drawerStore.GetSelectedDrawer();
-            ObservableCollection<DrawerFile> drawerFiles = new();
-            if (Drawer.FileList is not null)
-            {
-                drawerFiles = new ObservableCollection<DrawerFile>(Drawer.FileList);
-            }
-            DrawerFiles = drawerFiles;
+            _drawerStore.DrawerAdded -= OnDrawerChanged;
+            base.Dispose();
         }
-
     }
 }

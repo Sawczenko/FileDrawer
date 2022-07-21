@@ -7,13 +7,27 @@
              xmlns:components ="clr-namespace:FileDrawer.Components"
              mc:Ignorable="d"
              d:DesignHeight="200" d:DesignWidth="600"
-             Background="WhiteSmoke">
+             Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Label Content="Home"></Label>
+            <ItemsControl ItemsSource="{Binding ViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Header="{Binding Drawer.Name}">
+                            <ItemsControl ItemsSource="{Binding Drawer.FileList}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding Name}"></Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </Grid>
 </UserControl>

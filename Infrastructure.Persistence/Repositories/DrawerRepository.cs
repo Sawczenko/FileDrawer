@@ -18,7 +18,7 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<List<Drawer>> GetDrawers()
         {
-            return await _fileDrawerDbContext.Drawers.ToListAsync();
+            return await _fileDrawerDbContext.Drawers.Include(drawer => drawer.FileList).ToListAsync();
         }
 
         public Drawer GetDrawerById(int drawerId)
